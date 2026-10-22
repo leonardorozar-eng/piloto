@@ -1,0 +1,66 @@
+### Requisicoes de exemplo (extensao REST Client do VS Code). Rode a API com: npm run dev
+
+@url = http://localhost:3000
+
+
+### Cadastrar produto
+
+POST {{url}}/add_produto
+Content-Type: application/json
+
+{
+    "nome": "Teclado ABNT2",
+    "descricao": "Teclado USB padrao ABNT2 com fio",
+    "valor": 89.90,
+    "quantidade": 10
+}
+
+
+### Listar produtos
+
+GET {{url}}/listar_produtos
+
+
+### Consultar produto pelo id
+
+GET {{url}}/listar_produto/1
+
+
+### Atualizar produto
+
+PUT {{url}}/atualizar_produto/1
+Content-Type: application/json
+
+{
+    "nome": "Teclado ABNT2 preto",
+    "descricao": "Teclado USB padrao ABNT2 com fio",
+    "valor": 99.90,
+    "quantidade": 12
+}
+
+
+### Remover produto (so remove produto sem movimentacao)
+
+DELETE {{url}}/deletar_produto
+Content-Type: application/json
+
+{
+    "id_produto": 4
+}
+
+
+### Registrar entrada de estoque
+
+POST {{url}}/movimentar_produto
+Content-Type: application/json
+
+{
+    "id_produto": 1,
+    "tipo": "ENTRADA",
+    "quantidade": 5
+}
+
+
+### Listar movimentacoes
+
+GET {{url}}/listar_movimentacoes

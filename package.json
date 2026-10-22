@@ -1,0 +1,27 @@
+{
+  "name": "estrutura-prova-saep",
+  "version": "1.0.0",
+  "description": "Projeto base de controle de estoque com Node.js, Fastify e PostgreSQL.",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [
+    "saep",
+    "estoque",
+    "node",
+    "fastify",
+    "postgresql"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/jwt": "^10.2.2",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^16.4.7",
+    "fastify": "^5.8.5",
+    "pg": "^8.21.0"
+  }
+}

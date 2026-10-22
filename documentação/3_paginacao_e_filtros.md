@@ -58,6 +58,8 @@ A data na URL vai no formato `AAAA-MM-DD`, que é o formato que o PostgreSQL ent
 Os filtros são opcionais, então o SQL é montado aos poucos: um array de condições e um array de valores.
 O número do `$` é sempre o tamanho do array de valores depois do `push`.
 
+Estas funções `listar` substituem as de `1_organizacao_em_camadas.md` no repository, no service e no controller.
+
 `src/repositories/produto.repository.js`
 
 ```js

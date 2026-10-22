@@ -168,6 +168,7 @@ O token é gerado no controller porque quem tem o `jwt` registrado é o Fastify 
 
 ```js
 import * as usuarioService from '../services/usuario.service.js'
+import { responderErro } from '../utils/responderErro.js'
 
 export async function cadastrar(request, reply) {
   try {
@@ -188,8 +189,6 @@ export async function login(request, reply) {
   }
 }
 ```
-
-(`responderErro` é a mesma função de `1_organizacao_em_camadas.md`.)
 
 ## Rotas privadas: autenticar e permitir
 

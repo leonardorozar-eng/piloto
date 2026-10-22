@@ -186,12 +186,20 @@ export async function registrar(dados, idUsuario) {
 
   return resultado
 }
+
+export async function listar() {
+  return movimentacaoRepository.listar()
+}
 ```
+
+Este service substitui o de `1_organizacao_em_camadas.md`: agora ele aceita `ENTRADA` e `SAIDA`
+e recebe o id do usuário logado.
 
 ### controller
 
 ```js
 import * as movimentacaoService from '../services/movimentacao.service.js'
+import { responderErro } from '../utils/responderErro.js'
 
 export async function registrar(request, reply) {
   try {
@@ -210,6 +218,8 @@ export async function registrar(request, reply) {
   }
 }
 ```
+
+O `listar` do controller continua o mesmo de `1_organizacao_em_camadas.md`.
 
 ### rotas
 

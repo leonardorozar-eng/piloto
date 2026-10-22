@@ -12,6 +12,8 @@ com exemplos no mesmo domínio do sistema de estoque.
 | [4_movimentacoes_data_usuario_e_saida.md](4_movimentacoes_data_usuario_e_saida.md) | Data/hora e responsável na movimentação, saída com validação de saldo, transação |
 | [5_plano_de_testes_e_resultados.md](5_plano_de_testes_e_resultados.md) | Cenários de teste, evidências e documento de resultados |
 
-No VS Code, abra qualquer `.md` e use `Ctrl + Shift + V` para ver formatado.
+Abrindo a pasta do projeto no VS Code, os arquivos `.md` já abrem formatados (configuração em `.vscode/settings.json`).
+Para ver o texto original e copiar código: botão direito na aba > **Reopen Editor With...** > **Text Editor**.
+Em outra pasta, `Ctrl + Shift + V` mostra o arquivo formatado.
 
 Para testar as requisições, use a extensão **REST Client** com o arquivo `referencias.http` da raiz do projeto.

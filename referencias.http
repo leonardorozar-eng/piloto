@@ -3,64 +3,200 @@
 @url = http://localhost:3000
 
 
-### Cadastrar produto
+### Cadastrar um ADMIN
 
-POST {{url}}/add_produto
+POST {{url}}/usuarios
 Content-Type: application/json
 
 {
-    "nome": "Teclado ABNT2",
-    "descricao": "Teclado USB padrao ABNT2 com fio",
-    "valor": 89.90,
-    "quantidade": 10
+  "nome": "Ana Admin",
+  "email": "ana@empresa.com",
+  "senha": "admin123",
+  "perfil": "ADMIN"
 }
 
 
-### Listar produtos
+### Cadastrar um OPERADOR
+
+POST {{url}}/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Otavio Operador",
+  "email": "otavio@empresa.com",
+  "senha": "oper123",
+  "perfil": "OPERADOR"
+}
+
+
+### Login do operador
+
+# @name login
+POST {{url}}/login
+Content-Type: application/json
+
+{
+  "email": "otavio@empresa.com",
+  "senha": "oper123"
+}
+
+
+### Login do administrador
+
+# @name loginAdmin
+POST {{url}}/login
+Content-Type: application/json
+
+{
+  "email": "ana@empresa.com",
+  "senha": "admin123"
+}
+
+
+### Sem token: 401
 
 GET {{url}}/listar_produtos
 
 
+### Listar produtos (pagina 1, 2 por pagina)
+
+GET {{url}}/listar_produtos?pagina=1&limite=2
+Authorization: Bearer {{login.response.body.$.token}}
+
+
+### Listar produtos (pagina 2)
+
+GET {{url}}/listar_produtos?pagina=2&limite=2
+Authorization: Bearer {{login.response.body.$.token}}
+
+
+### Filtrar produtos por nome
+
+GET {{url}}/listar_produtos?nome=mouse
+Authorization: Bearer {{login.response.body.$.token}}
+
+
+### Filtrar produtos por data de cadastro
+
+GET {{url}}/listar_produtos?data_inicio=2026-01-01&data_fim=2026-12-31
+Authorization: Bearer {{login.response.body.$.token}}
+
+
+### Data invalida: 422
+
+GET {{url}}/listar_produtos?data_inicio=01/01/2026
+Authorization: Bearer {{login.response.body.$.token}}
+
+
 ### Consultar produto pelo id
 
-GET {{url}}/listar_produto/1
+GET {{url}}/listar_produto/2
+Authorization: Bearer {{login.response.body.$.token}}
+
+
+### Cadastrar produto
+
+POST {{url}}/add_produto
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "nome": "Detergente neutro",
+  "descricao": "Detergente neutro 500 ml",
+  "valor": 4.50,
+  "quantidade": 40
+}
 
 
 ### Atualizar produto
 
 PUT {{url}}/atualizar_produto/1
+Authorization: Bearer {{login.response.body.$.token}}
 Content-Type: application/json
 
 {
-    "nome": "Teclado ABNT2 preto",
-    "descricao": "Teclado USB padrao ABNT2 com fio",
-    "valor": 99.90,
-    "quantidade": 12
+  "nome": "Teclado ABNT2 preto",
+  "descricao": "Teclado USB padrao ABNT2 com fio",
+  "valor": 99.90,
+  "quantidade": 12
 }
 
 
-### Remover produto (so remove produto sem movimentacao)
+### OPERADOR tentando deletar: 403
 
 DELETE {{url}}/deletar_produto
+Authorization: Bearer {{login.response.body.$.token}}
 Content-Type: application/json
 
 {
-    "id_produto": 4
+  "id_produto": 1
+}
+
+
+### ADMIN deletando produto sem movimentacao
+
+DELETE {{url}}/deletar_produto
+Authorization: Bearer {{loginAdmin.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "id_produto": 4
 }
 
 
 ### Registrar entrada de estoque
 
 POST {{url}}/movimentar_produto
+Authorization: Bearer {{login.response.body.$.token}}
 Content-Type: application/json
 
 {
-    "id_produto": 1,
-    "tipo": "ENTRADA",
-    "quantidade": 5
+  "id_produto": 1,
+  "tipo": "ENTRADA",
+  "quantidade": 5
+}
+
+
+### Saida maior que o saldo: 422
+
+POST {{url}}/movimentar_produto
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "id_produto": 2,
+  "tipo": "SAIDA",
+  "quantidade": 30
+}
+
+
+### Saida igual ao saldo
+
+POST {{url}}/movimentar_produto
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "id_produto": 3,
+  "tipo": "SAIDA",
+  "quantidade": 5
+}
+
+
+### Saida menor que o saldo
+
+POST {{url}}/movimentar_produto
+Authorization: Bearer {{login.response.body.$.token}}
+Content-Type: application/json
+
+{
+  "id_produto": 1,
+  "tipo": "SAIDA",
+  "quantidade": 4
 }
 
 
 ### Listar movimentacoes
 
 GET {{url}}/listar_movimentacoes
+Authorization: Bearer {{login.response.body.$.token}}

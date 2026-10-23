@@ -1,5 +1,5 @@
 CENARIO 1 - Saida com quantidade maior que o saldo
-Executado em: 2026-10-23T12:23:23.333Z
+Executado em: 2026-10-23T12:30:32.467Z
 Usuario: Otavio Operador (OPERADOR)
 
 PASSO 1 - POST /login
@@ -21,7 +21,7 @@ PASSO 2 - GET /listar_produto/2 (antes)
     "descricao": "Mouse optico USB 1000 DPI",
     "valor_unitario": "39.90",
     "quantidade": 25,
-    "data_cadastro": "2026-10-23T12:21:30.914Z"
+    "data_cadastro": "2026-10-23T12:26:07.548Z"
   }
 }
 
@@ -35,7 +35,7 @@ PASSO 3 - movimentacoes do produto 2 (antes)
       "nome": "Mouse optico",
       "tipo": "ENTRADA",
       "quantidade": 25,
-      "data_hora": "2026-10-23T12:21:30.983Z",
+      "data_hora": "2026-10-23T12:26:07.713Z",
       "id_usuario": null,
       "usuario": null
     }
@@ -49,7 +49,7 @@ PASSO 4 - POST /movimentar_produto
     "tipo": "SAIDA",
     "quantidade": 30
   },
-  "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwibm9tZSI6Ik90YXZpbyBPcGVyYWRvciIsInBlcmZpbCI6Ik9QRVJBRE9SIiwiaWF0IjoxNzkyNzU4MjAzLCJleHAiOjE3OTI3NjE4MDN9.mwBU81MVshBPKcXHiB4oGe1OguDFNUVthCVf4INHNMo",
+  "authorization": "Bearer <token do OPERADOR>",
   "resposta": {
     "status": 422,
     "body": {
@@ -67,7 +67,7 @@ PASSO 5 - GET /listar_produto/2 (depois)
     "descricao": "Mouse optico USB 1000 DPI",
     "valor_unitario": "39.90",
     "quantidade": 25,
-    "data_cadastro": "2026-10-23T12:21:30.914Z"
+    "data_cadastro": "2026-10-23T12:26:07.548Z"
   }
 }
 
@@ -81,7 +81,7 @@ PASSO 6 - movimentacoes do produto 2 (depois)
       "nome": "Mouse optico",
       "tipo": "ENTRADA",
       "quantidade": 25,
-      "data_hora": "2026-10-23T12:21:30.983Z",
+      "data_hora": "2026-10-23T12:26:07.713Z",
       "id_usuario": null,
       "usuario": null
     }

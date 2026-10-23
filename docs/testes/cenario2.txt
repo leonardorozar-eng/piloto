@@ -1,0 +1,76 @@
+CENARIO 2 - Saida com quantidade igual ao saldo
+Executado em: 2026-10-23T12:23:23.333Z
+Usuario: Otavio Operador (OPERADOR)
+
+PASSO 1 - GET /listar_produto/3 (antes)
+{
+  "status": 200,
+  "body": {
+    "id_produto": 3,
+    "nome": "Monitor 21 polegadas",
+    "descricao": "Monitor LED 21 polegadas Full HD",
+    "valor_unitario": "749.00",
+    "quantidade": 5,
+    "data_cadastro": "2026-10-23T12:21:30.914Z"
+  }
+}
+
+PASSO 2 - POST /movimentar_produto
+{
+  "requisicao": {
+    "id_produto": 3,
+    "tipo": "SAIDA",
+    "quantidade": 5
+  },
+  "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwibm9tZSI6Ik90YXZpbyBPcGVyYWRvciIsInBlcmZpbCI6Ik9QRVJBRE9SIiwiaWF0IjoxNzkyNzU4MjAzLCJleHAiOjE3OTI3NjE4MDN9.mwBU81MVshBPKcXHiB4oGe1OguDFNUVthCVf4INHNMo",
+  "resposta": {
+    "status": 201,
+    "body": {
+      "mensagem": "Saida registrada com sucesso",
+      "id_movimentacao": 4,
+      "data_hora": "2026-10-23T12:23:23.396Z",
+      "responsavel": "Otavio Operador",
+      "quantidade_atual": 0
+    }
+  }
+}
+
+PASSO 3 - GET /listar_produto/3 (depois)
+{
+  "status": 200,
+  "body": {
+    "id_produto": 3,
+    "nome": "Monitor 21 polegadas",
+    "descricao": "Monitor LED 21 polegadas Full HD",
+    "valor_unitario": "749.00",
+    "quantidade": 0,
+    "data_cadastro": "2026-10-23T12:21:30.914Z"
+  }
+}
+
+PASSO 4 - movimentacoes do produto 3
+{
+  "status": 200,
+  "itens": [
+    {
+      "id_movimentacao": 4,
+      "id_produto": 3,
+      "nome": "Monitor 21 polegadas",
+      "tipo": "SAIDA",
+      "quantidade": 5,
+      "data_hora": "2026-10-23T12:23:23.396Z",
+      "id_usuario": 2,
+      "usuario": "Otavio Operador"
+    },
+    {
+      "id_movimentacao": 3,
+      "id_produto": 3,
+      "nome": "Monitor 21 polegadas",
+      "tipo": "ENTRADA",
+      "quantidade": 5,
+      "data_hora": "2026-10-23T12:21:30.983Z",
+      "id_usuario": null,
+      "usuario": null
+    }
+  ]
+}

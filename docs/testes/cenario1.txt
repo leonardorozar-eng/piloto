@@ -1,0 +1,89 @@
+CENARIO 1 - Saida com quantidade maior que o saldo
+Executado em: 2026-10-23T12:23:23.333Z
+Usuario: Otavio Operador (OPERADOR)
+
+PASSO 1 - POST /login
+{
+  "status": 200,
+  "usuario": {
+    "id": 2,
+    "nome": "Otavio Operador",
+    "perfil": "OPERADOR"
+  }
+}
+
+PASSO 2 - GET /listar_produto/2 (antes)
+{
+  "status": 200,
+  "body": {
+    "id_produto": 2,
+    "nome": "Mouse optico",
+    "descricao": "Mouse optico USB 1000 DPI",
+    "valor_unitario": "39.90",
+    "quantidade": 25,
+    "data_cadastro": "2026-10-23T12:21:30.914Z"
+  }
+}
+
+PASSO 3 - movimentacoes do produto 2 (antes)
+{
+  "status": 200,
+  "itens": [
+    {
+      "id_movimentacao": 2,
+      "id_produto": 2,
+      "nome": "Mouse optico",
+      "tipo": "ENTRADA",
+      "quantidade": 25,
+      "data_hora": "2026-10-23T12:21:30.983Z",
+      "id_usuario": null,
+      "usuario": null
+    }
+  ]
+}
+
+PASSO 4 - POST /movimentar_produto
+{
+  "requisicao": {
+    "id_produto": 2,
+    "tipo": "SAIDA",
+    "quantidade": 30
+  },
+  "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwibm9tZSI6Ik90YXZpbyBPcGVyYWRvciIsInBlcmZpbCI6Ik9QRVJBRE9SIiwiaWF0IjoxNzkyNzU4MjAzLCJleHAiOjE3OTI3NjE4MDN9.mwBU81MVshBPKcXHiB4oGe1OguDFNUVthCVf4INHNMo",
+  "resposta": {
+    "status": 422,
+    "body": {
+      "erro": "Saída não permitida: estoque insuficiente. Disponível: 25. Solicitado: 30."
+    }
+  }
+}
+
+PASSO 5 - GET /listar_produto/2 (depois)
+{
+  "status": 200,
+  "body": {
+    "id_produto": 2,
+    "nome": "Mouse optico",
+    "descricao": "Mouse optico USB 1000 DPI",
+    "valor_unitario": "39.90",
+    "quantidade": 25,
+    "data_cadastro": "2026-10-23T12:21:30.914Z"
+  }
+}
+
+PASSO 6 - movimentacoes do produto 2 (depois)
+{
+  "status": 200,
+  "itens": [
+    {
+      "id_movimentacao": 2,
+      "id_produto": 2,
+      "nome": "Mouse optico",
+      "tipo": "ENTRADA",
+      "quantidade": 25,
+      "data_hora": "2026-10-23T12:21:30.983Z",
+      "id_usuario": null,
+      "usuario": null
+    }
+  ]
+}

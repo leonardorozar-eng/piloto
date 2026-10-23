@@ -1,0 +1,76 @@
+CENARIO 3 - Saida com quantidade menor que o saldo
+Executado em: 2026-10-23T12:23:23.333Z
+Usuario: Otavio Operador (OPERADOR)
+
+PASSO 1 - GET /listar_produto/1 (antes)
+{
+  "status": 200,
+  "body": {
+    "id_produto": 1,
+    "nome": "Teclado ABNT2",
+    "descricao": "Teclado USB padrao ABNT2 com fio",
+    "valor_unitario": "89.90",
+    "quantidade": 10,
+    "data_cadastro": "2026-10-23T12:21:30.914Z"
+  }
+}
+
+PASSO 2 - POST /movimentar_produto
+{
+  "requisicao": {
+    "id_produto": 1,
+    "tipo": "SAIDA",
+    "quantidade": 4
+  },
+  "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwibm9tZSI6Ik90YXZpbyBPcGVyYWRvciIsInBlcmZpbCI6Ik9QRVJBRE9SIiwiaWF0IjoxNzkyNzU4MjAzLCJleHAiOjE3OTI3NjE4MDN9.mwBU81MVshBPKcXHiB4oGe1OguDFNUVthCVf4INHNMo",
+  "resposta": {
+    "status": 201,
+    "body": {
+      "mensagem": "Saida registrada com sucesso",
+      "id_movimentacao": 5,
+      "data_hora": "2026-10-23T12:23:23.407Z",
+      "responsavel": "Otavio Operador",
+      "quantidade_atual": 6
+    }
+  }
+}
+
+PASSO 3 - GET /listar_produto/1 (depois)
+{
+  "status": 200,
+  "body": {
+    "id_produto": 1,
+    "nome": "Teclado ABNT2",
+    "descricao": "Teclado USB padrao ABNT2 com fio",
+    "valor_unitario": "89.90",
+    "quantidade": 6,
+    "data_cadastro": "2026-10-23T12:21:30.914Z"
+  }
+}
+
+PASSO 4 e 5 - movimentacoes do produto 1
+{
+  "status": 200,
+  "itens": [
+    {
+      "id_movimentacao": 5,
+      "id_produto": 1,
+      "nome": "Teclado ABNT2",
+      "tipo": "SAIDA",
+      "quantidade": 4,
+      "data_hora": "2026-10-23T12:23:23.407Z",
+      "id_usuario": 2,
+      "usuario": "Otavio Operador"
+    },
+    {
+      "id_movimentacao": 1,
+      "id_produto": 1,
+      "nome": "Teclado ABNT2",
+      "tipo": "ENTRADA",
+      "quantidade": 10,
+      "data_hora": "2026-10-23T12:21:30.983Z",
+      "id_usuario": null,
+      "usuario": null
+    }
+  ]
+}
